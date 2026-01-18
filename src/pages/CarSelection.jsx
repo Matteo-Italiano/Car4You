@@ -1,39 +1,36 @@
-// src/pages/CarSelection.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import CarCard from '../components/CarCard';
-import { CARS } from '../data/cars'; // Deine Datenbank importieren
+import { CARS } from '../data/cars';
 import './CarSelection.css';
 
 const CarSelection = () => {
   const location = useLocation();
   
-  // Wir holen die Suchdaten aus dem State (von der Home Page)
-  // Falls jemand direkt per URL kommt, nehmen wir leere defaults
   const searchData = location.state || JSON.parse(localStorage.getItem('car4you_search')) || {};
 
-  // STATE FÜR FILTER
-  const [maxPrice, setMaxPrice] = useState(120); // Slider Wert
+  const [maxPrice, setMaxPrice] = useState(120);
   const [selectedCategory, setSelectedCategory] = useState("Alle");
+  const [selectedGear, setSelectedGear] = useState("Alle");
+  const [selectedFuel, setSelectedFuel] = useState("Alle");
+  const [selectedSeats, setSelectedSeats] = useState("Alle");
 
-  // HIER PASSIERT DAS FILTERN (Logik für Note 5-6!)
   const filteredCars = CARS.filter(car => {
-    // 1. Preis Check
     const isPriceOkay = car.price <= maxPrice;
-    // 2. Kategorie Check
     const isCategoryOkay = selectedCategory === "Alle" || car.category === selectedCategory;
-    
-    return isPriceOkay && isCategoryOkay;
+    const isGearOkay = selectedGear === "Alle" || car.gear === selectedGear;
+    const isFuelOkay = selectedFuel === "Alle" || car.fuel === selectedFuel;
+    const isSeatsOkay = selectedSeats === "Alle" || car.seats.toString() === selectedSeats;
+
+    return isPriceOkay && isCategoryOkay && isGearOkay && isFuelOkay && isSeatsOkay;
   });
 
   return (
     <div className="selection-container">
       
-      {/* LINKER BEREICH: FILTER (Wichtig für Aufgabe 1.5) */}
       <aside className="filter-sidebar">
         <h2>Filter</h2>
         
-        {/* Der berühmte SLIDER */}
         <div className="filter-group">
           <label>Preis bis: <strong>{maxPrice} CHF</strong> / Tag</label>
           <input 
@@ -46,7 +43,6 @@ const CarSelection = () => {
           />
         </div>
 
-        {/* Kategorien */}
         <div className="filter-group">
           <label>Kategorie</label>
           <select 
@@ -62,13 +58,53 @@ const CarSelection = () => {
           </select>
         </div>
 
+        <div className="filter-group">
+          <label>Getriebe</label>
+          <select 
+            value={selectedGear} 
+            onChange={(e) => setSelectedGear(e.target.value)}
+          >
+            <option value="Alle">Egal</option>
+            <option value="Manuell">Manuell ⚙️</option>
+            <option value="Automatik">Automatik 🤖</option>
+          </select>
+        </div>
+
+        <div className="filter-group">
+          <label>Antrieb</label>
+          <select 
+            value={selectedFuel} 
+            onChange={(e) => setSelectedFuel(e.target.value)}
+          >
+            <option value="Alle">Egal</option>
+            <option value="Benzin">Benzin ⛽</option>
+            <option value="Diesel">Diesel ⛽</option>
+            <option value="Elektro">Elektro ⚡</option>
+            <option value="Hybrid">Hybrid 🔋</option>
+          </select>
+        </div>
+
+        <div className="filter-group">
+          <label>Sitze</label>
+          <select 
+            value={selectedSeats} 
+            onChange={(e) => setSelectedSeats(e.target.value)}
+          >
+            <option value="Alle">Egal</option>
+            <option value="2">2 Sitze</option>
+            <option value="4">4 Sitze</option>
+            <option value="5">5 Sitze</option>
+            <option value="7">7 Sitze</option>
+            <option value="9">9 Sitze</option>
+          </select>
+        </div>
+
         <div className="search-summary">
           <p>📍 Abholung: {searchData.pickupLoc || "Nicht gewählt"}</p>
           <p>📅 Datum: {searchData.startDate || "?"} bis {searchData.endDate || "?"}</p>
         </div>
       </aside>
 
-      {/* RECHTER BEREICH: AUTO LISTE */}
       <main className="cars-grid">
         {filteredCars.length > 0 ? (
           filteredCars.map(car => (
@@ -77,7 +113,7 @@ const CarSelection = () => {
         ) : (
           <div className="no-cars">
             <h3>Keine Autos gefunden 😢</h3>
-            <p>Versuch den Preis-Regler etwas höher zu stellen.</p>
+            <p>Versuch, die Filter etwas lockerer einzustellen.</p>
           </div>
         )}
       </main>

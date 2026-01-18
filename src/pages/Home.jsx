@@ -14,6 +14,10 @@ const Home = () => {
     endDate: ''
   });
 
+  const getTodayString = () => {
+    return new Date().toISOString().split('T')[0];
+  };
+
   useEffect(() => {
     const savedData = localStorage.getItem('car4you_search');
     if (savedData) {
@@ -33,6 +37,17 @@ const Home = () => {
   const handleSearch = () => {
     if (!searchData.pickupLoc || !searchData.startDate || !searchData.endDate) {
       alert("Bitte fülle alle Pflichtfelder aus!");
+      return;
+    }
+
+    const today = getTodayString();
+    if (searchData.startDate < today) {
+      alert("Das Abholdatum darf nicht in der Vergangenheit liegen!");
+      return;
+    }
+
+    if (searchData.endDate < searchData.startDate) {
+      alert("Das Rückgabedatum darf nicht vor dem Abholdatum sein!");
       return;
     }
 
@@ -95,6 +110,8 @@ const Home = () => {
               <input 
                 type="date" 
                 name="startDate" 
+                
+                min={getTodayString()} 
                 value={searchData.startDate} 
                 onChange={handleChange} 
               />
@@ -105,6 +122,8 @@ const Home = () => {
               <input 
                 type="date" 
                 name="endDate" 
+                // NEU: Sperrt alle Tage VOR dem gewählten Abholdatum
+                min={searchData.startDate || getTodayString()} 
                 value={searchData.endDate} 
                 onChange={handleChange} 
               />

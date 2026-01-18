@@ -124,10 +124,10 @@ export default function BookingForm() {
     setForm((prev) => ({ ...prev, [name]: value }));
   }
 
-  function toggleExtra(key) {
+  function setExtraValue(key, value) {
     setForm((prev) => ({
       ...prev,
-      extras: { ...prev.extras, [key]: !prev.extras[key] },
+      extras: { ...prev.extras, [key]: value },
     }));
   }
 
@@ -210,8 +210,9 @@ export default function BookingForm() {
 
           <h2 className="section-title">Extras</h2>
 
-          <div className="extras-grid">
+          <div className="extras-list">
             {Object.keys(EXTRA_PRICES).map((key) => (
+
               <button
                 key={key}
                 type="button"
@@ -224,6 +225,7 @@ export default function BookingForm() {
                 </div>
                 <span className="extra-pill">{form.extras[key] ? "Ausgewählt" : "Wählbar"}</span>
               </button>
+
             ))}
           </div>
 
