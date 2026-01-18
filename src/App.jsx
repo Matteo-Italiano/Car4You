@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/Home';
 import CarSelection from './pages/CarSelection';
+import InsurancePage from './pages/InsurancePage';
 import BookingForm from './pages/BookingForm';
 import SuccessPage from './pages/SuccessPage';
 
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cars" element={<CarSelection />} />
+          <Route path="/insurance/:carId" element={<InsurancePage />} />
           <Route path="/book/:carId" element={<BookingForm />} />
           <Route path="/success" element={<SuccessPage />} />
         </Routes>

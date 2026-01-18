@@ -24,6 +24,8 @@ export default function SummaryBox({
   rentalDays,
   carPerDay,
   extrasPerDay,
+  selectedInsurance,
+  insuranceData,
 }) {
   const prettyExtras =
     extrasSelected.length > 0
@@ -38,7 +40,7 @@ export default function SummaryBox({
         <div className="summary-total">{formatCHF(total)} CHF</div>
         <div className="summary-sub">
           {rentalDays > 0
-            ? `${rentalDays} Tag(e) · CHF ${carPerDay + extrasPerDay}/Tag`
+            ? `${rentalDays} Tag(e) · CHF ${carPerDay + extrasPerDay + (insuranceData?.price || 0)}/Tag`
             : "Bitte Datum auswählen"}
         </div>
       </div>
@@ -46,6 +48,11 @@ export default function SummaryBox({
       <div className="summary-row">
         <span className="label">Fahrzeug</span>
         <span className="value">{car?.brand} {car?.model}</span>
+      </div>
+
+      <div className="summary-row">
+        <span className="label">Versicherung</span>
+        <span className="value">{insuranceData?.name || "—"}</span>
       </div>
 
       <div className="summary-row">
