@@ -55,7 +55,7 @@
   display: grid;
   grid-template-columns: 1.5fr 2fr;
   gap: 40px;
-  align-items: flex-end;
+  align-items: flex-start; 
 }
 
 .location-section {
