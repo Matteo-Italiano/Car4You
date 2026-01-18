@@ -6,10 +6,10 @@ export const CARS = [
     brand: "Fiat",
     category: "City",
     price: 45,
-    gear: "Manuell", // Für den Filter "Schaltung"
+    gear: "Manuell",
     seats: 4,
     fuel: "Benzin",
-    image: "/assets/fiat500.jpg" // Stellt sicher, dass ihr Bilder mit diesen Namen im assets-Ordner habt
+    image: "/src/assets/Screenshot 2026-01-18 211331.png"
   },
   {
     id: 2,
@@ -20,7 +20,7 @@ export const CARS = [
     gear: "Automatik",
     seats: 5,
     fuel: "Benzin",
-    image: "/assets/vw-polo.jpg"
+    image: "/src/assets/Screenshot 2026-01-18 211343.png"
   },
 
   // Kategorie: FAMILY (CHF 70.-) 
@@ -33,7 +33,7 @@ export const CARS = [
     gear: "Automatik",
     seats: 7,
     fuel: "Diesel",
-    image: "/assets/vw-touran.jpg"
+    image: "/src/assets/Screenshot 2026-01-18 211356.png"
   },
   {
     id: 4,
@@ -44,7 +44,7 @@ export const CARS = [
     gear: "Manuell",
     seats: 5,
     fuel: "Benzin",
-    image: "/assets/skoda-octavia.jpg"
+    image: "/src/assets/Screenshot 2026-01-18 211405.png"
   },
 
   // Kategorie: SUV (CHF 90.-) 
@@ -57,7 +57,7 @@ export const CARS = [
     gear: "Automatik",
     seats: 5,
     fuel: "Diesel",
-    image: "/assets/vw-tiguan.jpg"
+    image: "/src/assets/Screenshot 2026-01-18 213225.png"
   },
   {
     id: 6,
@@ -68,7 +68,7 @@ export const CARS = [
     gear: "Automatik",
     seats: 5,
     fuel: "Hybrid",
-    image: "/assets/volvo-xc60.jpg"
+    image: "/src/assets/Screenshot 2026-01-18 213233.png"
   },
 
   // Kategorie: SPORT (CHF 120.-) 
@@ -81,7 +81,7 @@ export const CARS = [
     gear: "Automatik",
     seats: 2,
     fuel: "Benzin",
-    image: "/assets/bmw-z4.jpg"
+    image: "/src/assets/Screenshot 2026-01-18 213238.png"
   },
   {
     id: 8,
@@ -90,9 +90,9 @@ export const CARS = [
     category: "Sport",
     price: 120,
     gear: "Manuell",
-    seats: 2, // Achtung: Sportwagen haben oft weniger Sitze (Filter-Logik!)
+    seats: 2,
     fuel: "Benzin",
-    image: "/assets/audi-tt.jpg"
+    image: "/src/assets/Screenshot 2026-01-18 213244.png"
   },
 
   // Kategorie: E-CAR (CHF 100.-) 
@@ -102,10 +102,10 @@ export const CARS = [
     brand: "Tesla",
     category: "E-Car",
     price: 100,
-    gear: "Automatik", // E-Autos sind fast immer Automatik
+    gear: "Automatik",
     seats: 5,
     fuel: "Elektro",
-    image: "/assets/tesla-model3.jpg"
+    image: "/src/assets/Screenshot 2026-01-18 213251.png"
   },
   {
     id: 10,
@@ -116,6 +116,6 @@ export const CARS = [
     gear: "Automatik",
     seats: 5,
     fuel: "Elektro",
-    image: "/assets/renault-zoe.jpg"
+    image: "/src/assets/Screenshot 2026-01-18 213256.png"
   }
 ];
