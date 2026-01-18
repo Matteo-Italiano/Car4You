@@ -1,6 +1,5 @@
-/* src/components/CarCard.css */
 .car-card {
-  background: linear-gradient(145deg, #1e1e2f, #2a2a40); /* Dunkler Background */
+  background: linear-gradient(145deg, #1e1e2f, #2a2a40); 
   border-radius: 15px;
   padding: 20px;
   color: white;
@@ -15,7 +14,7 @@
 
 .car-card:hover {
   transform: translateY(-5px);
-  border-color: #7b2cbf; /* Lila Rand beim Hover */
+  border-color: #7b2cbf;
 }
 
 .card-header {
@@ -42,7 +41,7 @@
 .card-image img {
   width: 100%;
   height: 160px;
-  object-fit: cover; /* Schneidet das Bild zurecht ohne zu verzerren */
+  object-fit: cover;
   border-radius: 10px;
   margin-bottom: 15px;
 }
@@ -59,7 +58,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: auto; /* Drückt den Footer nach unten */
+  margin-top: auto;
 }
 
 .price {
@@ -79,7 +78,7 @@
 }
 
 .rent-btn {
-  background: linear-gradient(90deg, #7b2cbf, #9d4edd); /* Lila Gradient */
+  background: linear-gradient(90deg, #7b2cbf, #9d4edd);
   border: none;
   color: white;
   padding: 10px 20px;

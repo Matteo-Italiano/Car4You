@@ -1,4 +1,3 @@
-/* src/components/Header.css */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -11,7 +10,6 @@
   font-family: 'Arial', sans-serif;
 }
 
-/* WICHTIG: Hier habe ich .navbar-logo zu .header-logo geändert, damit es passt */
 .header-logo a {
   text-decoration: none;
   font-size: 24px;
@@ -31,7 +29,6 @@
   margin-left: 2px;
 }
 
-/* WICHTIG: Hier habe ich .navbar-right zu .header-right geändert */
 .header-right {
   display: flex;
   align-items: center;
