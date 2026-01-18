@@ -1,5 +1,4 @@
-// src/pages/Home.jsx
-import React, { useState, useEffect } from 'react'; // <--- useEffect neu importieren
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LOCATIONS } from '../data/locations';
 import './Home.css';
@@ -15,16 +14,12 @@ const Home = () => {
     endDate: ''
   });
 
-  // NEU: Beim Starten der Seite prüfen, ob schon was im LocalStorage liegt
   useEffect(() => {
     const savedData = localStorage.getItem('car4you_search');
     if (savedData) {
-      // Wenn ja, füllen wir das Formular damit aus
       const parsedData = JSON.parse(savedData);
       setSearchData(parsedData);
       
-      // Kleines Extra: Wenn Abhol- und Rückgabeort verschieden sind,
-      // zeigen wir das zweite Feld direkt an.
       if (parsedData.pickupLoc !== parsedData.returnLoc) {
         setShowReturnLoc(true);
       }
@@ -46,11 +41,8 @@ const Home = () => {
       returnLoc: showReturnLoc ? searchData.returnLoc : searchData.pickupLoc
     };
 
-    // NEU: HIER SPEICHERN WIR ES IM BROWSER!
-    // Wir müssen JSON.stringify benutzen, weil LocalStorage nur Text kann.
     localStorage.setItem('car4you_search', JSON.stringify(finalData));
     
-    // Trotzdem noch navigieren
     navigate('/cars', { state: finalData });
   };
 
@@ -59,7 +51,6 @@ const Home = () => {
       <div className="search-box">
         <div className="search-inputs">
           
-          {/* LINKER TEIL: ORTE */}
           <div className="location-section">
             <div className="input-group">
               <label>Abholort</label>
@@ -98,7 +89,6 @@ const Home = () => {
             )}
           </div>
 
-          {/* RECHTER TEIL: DATUM & BUTTON */}
           <div className="date-section">
             <div className="input-group">
               <label>Abholdatum</label>
