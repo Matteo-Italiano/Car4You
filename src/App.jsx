@@ -5,7 +5,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/Home';
 import CarSelection from './pages/CarSelection';
-import BookingForm from './pages/BookingForm'; // ✅ NEU
+import BookingForm from './pages/BookingForm';
+import SuccessPage from './pages/SuccessPage';
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cars" element={<CarSelection />} />
-          <Route path="/book/:carId" element={<BookingForm />} /> {/* ✅ NEU */}
+          <Route path="/book/:carId" element={<BookingForm />} />
+          <Route path="/success" element={<SuccessPage />} />
         </Routes>
       </div>
     </Router>

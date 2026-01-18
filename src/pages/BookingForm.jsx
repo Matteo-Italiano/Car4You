@@ -156,7 +156,15 @@ export default function BookingForm() {
     if (!isReady) return;
 
     saveToLocalStorage();
-    alert("✅ Reservation gespeichert (Demo).");
+
+    // Navigate to success page with booking data
+    navigate("/success", {
+      state: {
+        car: selectedCar,
+        searchData: searchData,
+        form: form,
+      },
+    });
   }
 
   if (!selectedCar) return null;
