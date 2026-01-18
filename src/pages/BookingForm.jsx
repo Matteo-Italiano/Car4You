@@ -124,7 +124,6 @@ export default function BookingForm() {
     setForm((prev) => ({ ...prev, [name]: value }));
   }
 
-  // HIER IST DIE FUNKTION, DIE GEFEHLT HAT:
   function toggleExtra(key) {
     setForm((prev) => ({
       ...prev,
@@ -155,6 +154,7 @@ export default function BookingForm() {
 
     if (!isReady) return;
 
+    // Speichert intern den Status, falls der User zurück navigiert (optional)
     saveToLocalStorage();
 
     // Navigate to success page with booking data
@@ -255,17 +255,8 @@ export default function BookingForm() {
           </div>
 
           <div className="form-actions">
-            <button
-              type="button"
-              className="secondary"
-              onClick={() => {
-                saveToLocalStorage();
-                alert("💾 Entwurf gespeichert.");
-              }}
-            >
-              Entwurf speichern
-            </button>
-
+            {/* HIER WURDE DER ENTWURF-BUTTON ENTFERNT */}
+            
             <button type="submit" className="primary" disabled={!isReady}>
               Kostenpflichtig mieten
             </button>
