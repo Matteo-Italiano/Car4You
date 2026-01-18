@@ -105,7 +105,6 @@ const Home = () => {
             {showReturnLoc && (
               <div className="input-group fade-in">
                 <label>Rückgabeort</label>
-                {/* NEU: Wrapper auch hier */}
                 <div className="input-wrapper">
                   <input 
                     list="airports" 
