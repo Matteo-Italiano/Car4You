@@ -11,7 +11,9 @@ const Home = () => {
     pickupLoc: '',
     returnLoc: '',
     startDate: '',
-    endDate: ''
+    pickupTime: '',
+    endDate: '',
+    returnTime: ''
   });
 
   const getTodayString = () => {
@@ -39,7 +41,7 @@ const Home = () => {
   };
 
   const handleSearch = () => {
-    if (!searchData.pickupLoc || !searchData.startDate || !searchData.endDate) {
+    if (!searchData.pickupLoc || !searchData.startDate || !searchData.pickupTime || !searchData.endDate || !searchData.returnTime) {
       alert("Bitte fülle alle Pflichtfelder aus!");
       return;
     }
@@ -137,12 +139,32 @@ const Home = () => {
             </div>
 
             <div className="input-group">
+              <label>Zeit</label>
+              <input 
+                type="time" 
+                name="pickupTime" 
+                value={searchData.pickupTime} 
+                onChange={handleChange} 
+              />
+            </div>
+
+            <div className="input-group">
               <label>Rückgabe</label>
               <input 
                 type="date" 
                 name="endDate" 
                 min={searchData.startDate || getTodayString()} 
                 value={searchData.endDate} 
+                onChange={handleChange} 
+              />
+            </div>
+
+            <div className="input-group">
+              <label>Zeit</label>
+              <input 
+                type="time" 
+                name="returnTime" 
+                value={searchData.returnTime} 
                 onChange={handleChange} 
               />
             </div>
