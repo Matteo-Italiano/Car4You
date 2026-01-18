@@ -8,6 +8,14 @@ function formatCHF(value) {
   });
 }
 
+const EXTRA_LABELS = {
+  kindersitz: "Kindersitz",
+  zusatzfahrer: "Zusatzfahrer",
+  navi: "Navigation",
+  dachbox: "Dachbox",
+  vollkasko: "Vollkasko",
+};
+
 export default function SummaryBox({
   total,
   car,
@@ -17,6 +25,11 @@ export default function SummaryBox({
   carPerDay,
   extrasPerDay,
 }) {
+  const prettyExtras =
+    extrasSelected.length > 0
+      ? extrasSelected.map((k) => EXTRA_LABELS[k] || k).join(", ")
+      : "Keine";
+
   return (
     <aside className="summary">
       <h3 className="summary-title">Zusammenfassung</h3>
@@ -47,9 +60,7 @@ export default function SummaryBox({
 
       <div className="summary-row">
         <span className="label">Extras</span>
-        <span className="value">
-          {extrasSelected.length > 0 ? extrasSelected.join(", ") : "Keine"}
-        </span>
+        <span className="value">{prettyExtras}</span>
       </div>
     </aside>
   );

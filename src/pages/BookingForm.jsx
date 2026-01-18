@@ -12,6 +12,14 @@ const EXTRA_PRICES = {
   vollkasko: 25,
 };
 
+const EXTRA_LABELS = {
+  kindersitz: "Kindersitz",
+  zusatzfahrer: "Zusatzfahrer",
+  navi: "Navigation",
+  dachbox: "Dachbox",
+  vollkasko: "Vollkasko",
+};
+
 function validate(form) {
   const errors = {};
 
@@ -43,12 +51,10 @@ export default function BookingForm() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Auto holen (state vom vorherigen Screen ist am einfachsten)
   const selectedCarFromState = location.state?.selectedCar;
   const selectedCarFromData = CARS.find((c) => String(c.id) === String(carId));
   const selectedCar = selectedCarFromState || selectedCarFromData;
 
-  // Suchdaten aus LocalStorage
   const [searchData, setSearchData] = useState({
     pickupLoc: "",
     returnLoc: "",
@@ -56,7 +62,6 @@ export default function BookingForm() {
     endDate: "",
   });
 
-  // Formular State
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -75,7 +80,6 @@ export default function BookingForm() {
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
 
-  // Bei Start: LocalStorage laden (search + evtl. booking draft)
   useEffect(() => {
     const savedSearch = JSON.parse(localStorage.getItem("car4you_search")) || {};
     setSearchData({
@@ -91,17 +95,14 @@ export default function BookingForm() {
     }
   }, [carId]);
 
-  // Wenn kein Auto gefunden wird → zurück
   useEffect(() => {
     if (!selectedCar) navigate("/cars");
   }, [selectedCar, navigate]);
 
-  // Validierung immer dann, wenn sich form ändert
   useEffect(() => {
     setErrors(validate(form));
   }, [form]);
 
-  // Berechnungen (einfach, ohne useMemo)
   const rentalDays = calcDays(searchData.startDate, searchData.endDate);
 
   const extrasSelected = Object.keys(form.extras).filter((key) => form.extras[key]);
@@ -112,7 +113,6 @@ export default function BookingForm() {
 
   const isFormValid = Object.keys(errors).length === 0;
 
-  // ready = form valid + search valid + days > 0
   const isReady =
     isFormValid &&
     searchData.pickupLoc &&
@@ -144,7 +144,6 @@ export default function BookingForm() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    // touched setzen -> Fehler sichtbar
     setTouched({
       firstName: true,
       lastName: true,
@@ -220,10 +219,10 @@ export default function BookingForm() {
                 onClick={() => toggleExtra(key)}
               >
                 <div className="extra-left">
-  <span className="extra-title">{key}</span>
-  <span className="extra-sub">+ CHF {EXTRA_PRICES[key]}/Tag</span>
-</div>
-<span className="extra-pill">{form.extras[key] ? "Ausgewählt" : "Wählbar"}</span>
+                  <span className="extra-title">{EXTRA_LABELS[key]}</span>
+                  <span className="extra-sub">+ CHF {EXTRA_PRICES[key]}/Tag</span>
+                </div>
+                <span className="extra-pill">{form.extras[key] ? "Ausgewählt" : "Wählbar"}</span>
               </button>
             ))}
           </div>
@@ -247,7 +246,14 @@ export default function BookingForm() {
           </div>
 
           <div className="form-actions">
-            <button type="button" className="secondary" onClick={() => { saveToLocalStorage(); alert("💾 Entwurf gespeichert."); }}>
+            <button
+              type="button"
+              className="secondary"
+              onClick={() => {
+                saveToLocalStorage();
+                alert("💾 Entwurf gespeichert.");
+              }}
+            >
               Entwurf speichern
             </button>
 

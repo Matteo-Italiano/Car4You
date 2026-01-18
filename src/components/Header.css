@@ -2,51 +2,88 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 40px;
-  background-color: white;
-  border: 2px solid black;
-  border-radius: 15px;
-  margin: 20px;
-  font-family: 'Arial', sans-serif;
+  padding: 16px 40px;
+  background: linear-gradient(135deg, rgba(15, 15, 30, 0.8) 0%, rgba(26, 26, 46, 0.8) 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .header-logo a {
   text-decoration: none;
-  font-size: 24px;
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
 }
 
-.logo-car {
-  color: black;
+.header-logo a:hover {
+  transform: scale(1.05);
 }
 
-.logo-4you {
-  color: #ff9900;
-  background-color: black;
-  color: white;
-  padding: 2px 5px;
-  border-radius: 5px;
-  margin-left: 2px;
+.logo-img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(1.1);
 }
 
 .header-right {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 32px;
 }
 
 .slogan {
-  font-weight: bold;
-  color: black;
-  font-size: 16px;
+  font-weight: 600;
+  color: #e5e7eb;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .language-selector {
   display: flex;
   align-items: center;
-  gap: 5px;
-  font-weight: bold;
+  gap: 8px;
+  font-weight: 500;
   cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  transition: all 0.3s ease;
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+.language-selector:hover {
+  border-color: rgba(96, 165, 250, 0.3);
+  background: rgba(96, 165, 250, 0.05);
+  color: #60a5fa;
+}
+
+.globe-icon {
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 12px 20px;
+  }
+
+  .header-right {
+    gap: 16px;
+  }
+
+  .slogan {
+    display: none;
+  }
 }
 
 .header-logo a {
