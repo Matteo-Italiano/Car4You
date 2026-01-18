@@ -7,9 +7,8 @@ const CarCard = ({ car }) => {
   const navigate = useNavigate();
 
   const handleRent = () => {
-    // Navigiere zum Buchungsformular (Screen 3)
-    // Wir geben die Car-ID mit, damit dein Kollege weiß, welches Auto es ist
-    navigate(`/book/${car.id}`, { state: { selectedCar: car } });
+    // Navigate to insurance selection page
+    navigate(`/insurance/${car.id}`, { state: { selectedCar: car } });
   };
 
   return (

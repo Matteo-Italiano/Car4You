@@ -20,6 +20,12 @@ const EXTRA_LABELS = {
   vollkasko: "Vollkasko",
 };
 
+const INSURANCE_OPTIONS = {
+  basic: { name: "Basis-Versicherung", price: 0 },
+  standard: { name: "Standard-Versicherung", price: 15 },
+  premium: { name: "Premium-Versicherung", price: 35 },
+};
+
 function validate(form) {
   const errors = {};
 
@@ -55,12 +61,16 @@ export default function BookingForm() {
   const selectedCarFromData = CARS.find((c) => String(c.id) === String(carId));
   const selectedCar = selectedCarFromState || selectedCarFromData;
 
+  const selectedInsuranceFromState = location.state?.selectedInsurance || "standard";
+
   const [searchData, setSearchData] = useState({
     pickupLoc: "",
     returnLoc: "",
     startDate: "",
     endDate: "",
   });
+
+  const [selectedInsurance, setSelectedInsurance] = useState(selectedInsuranceFromState);
 
   const [form, setForm] = useState({
     firstName: "",
@@ -277,6 +287,8 @@ export default function BookingForm() {
           rentalDays={rentalDays}
           carPerDay={carPerDay}
           extrasPerDay={extrasPerDay}
+          selectedInsurance={selectedInsurance}
+          insuranceData={INSURANCE_OPTIONS[selectedInsurance]}
         />
       </div>
     </div>
