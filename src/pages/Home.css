@@ -1,0 +1,117 @@
+/* src/pages/Home.css */
+
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background-color: #f5f5f5;
+  background-image: url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=1000&auto=format&fit=crop'); /* Optional: Cooles Hintergrundbild */
+  background-size: cover;
+  background-position: center;
+}
+
+.search-box {
+  background-color: white;
+  padding: 30px;
+  border-radius: 15px;
+  border: 2px solid black;
+  box-shadow: 10px 10px 0px black; /* Comic-Style Schatten wie Skizze */
+  width: 90%;
+  max-width: 1000px;
+}
+
+.search-inputs {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start; /* Oben bündig */
+}
+
+/* Linke Seite (Orte) kriegt mehr Platz */
+.location-section {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Rechte Seite (Datum) etwas kompakter */
+.date-section {
+  flex: 3;
+  display: flex;
+  gap: 15px;
+  align-items: flex-end; /* Button unten bündig */
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.input-group label {
+  font-family: 'Comic Sans MS', 'Arial', sans-serif; /* Skizzen-Font Style ;) */
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  padding: 12px;
+  border: 2px solid black;
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none;
+}
+
+/* Der Toggle-Text Style */
+.toggle-return {
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  color: black;
+  margin-left: 5px;
+  user-select: none;
+}
+
+.toggle-return:hover {
+  text-decoration: underline;
+  color: #ff9900; /* Car4You Orange */
+}
+
+/* Kleine Animation beim Einblenden */
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.search-btn {
+  padding: 12px 20px;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap; /* Text bricht nicht um */
+  height: 46px; /* Höhe an Inputs anpassen */
+  box-shadow: 3px 3px 0px black;
+}
+
+.search-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px black;
+}
+
+/* Mobile Anpassung (falls Lehrer doch fragt) */
+@media (max-width: 768px) {
+  .search-inputs {
+    flex-direction: column;
+  }
+  .date-section {
+    flex-direction: column;
+    width: 100%;
+  }
+}
