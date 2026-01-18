@@ -43,12 +43,10 @@ export default function BookingForm() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Auto holen (state vom vorherigen Screen ist am einfachsten)
   const selectedCarFromState = location.state?.selectedCar;
   const selectedCarFromData = CARS.find((c) => String(c.id) === String(carId));
   const selectedCar = selectedCarFromState || selectedCarFromData;
 
-  // Suchdaten aus LocalStorage
   const [searchData, setSearchData] = useState({
     pickupLoc: "",
     returnLoc: "",
@@ -56,7 +54,6 @@ export default function BookingForm() {
     endDate: "",
   });
 
-  // Formular State
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -75,7 +72,6 @@ export default function BookingForm() {
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
 
-  // Bei Start: LocalStorage laden (search + evtl. booking draft)
   useEffect(() => {
     const savedSearch = JSON.parse(localStorage.getItem("car4you_search")) || {};
     setSearchData({
@@ -91,17 +87,14 @@ export default function BookingForm() {
     }
   }, [carId]);
 
-  // Wenn kein Auto gefunden wird → zurück
   useEffect(() => {
     if (!selectedCar) navigate("/cars");
   }, [selectedCar, navigate]);
 
-  // Validierung immer dann, wenn sich form ändert
   useEffect(() => {
     setErrors(validate(form));
   }, [form]);
 
-  // Berechnungen (einfach, ohne useMemo)
   const rentalDays = calcDays(searchData.startDate, searchData.endDate);
 
   const extrasSelected = Object.keys(form.extras).filter((key) => form.extras[key]);
@@ -112,7 +105,6 @@ export default function BookingForm() {
 
   const isFormValid = Object.keys(errors).length === 0;
 
-  // ready = form valid + search valid + days > 0
   const isReady =
     isFormValid &&
     searchData.pickupLoc &&
@@ -124,10 +116,10 @@ export default function BookingForm() {
     setForm((prev) => ({ ...prev, [name]: value }));
   }
 
-  function toggleExtra(key) {
+  function setExtraValue(key, value) {
     setForm((prev) => ({
       ...prev,
-      extras: { ...prev.extras, [key]: !prev.extras[key] },
+      extras: { ...prev.extras, [key]: value },
     }));
   }
 
@@ -144,7 +136,6 @@ export default function BookingForm() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    // touched setzen -> Fehler sichtbar
     setTouched({
       firstName: true,
       lastName: true,
@@ -211,20 +202,36 @@ export default function BookingForm() {
 
           <h2 className="section-title">Extras</h2>
 
-          <div className="extras-grid">
+          <div className="extras-list">
             {Object.keys(EXTRA_PRICES).map((key) => (
-              <button
-                key={key}
-                type="button"
-                className={`extra-card ${form.extras[key] ? "active" : ""}`}
-                onClick={() => toggleExtra(key)}
-              >
-                <div className="extra-left">
-  <span className="extra-title">{key}</span>
-  <span className="extra-sub">+ CHF {EXTRA_PRICES[key]}/Tag</span>
-</div>
-<span className="extra-pill">{form.extras[key] ? "Ausgewählt" : "Wählbar"}</span>
-              </button>
+              <div key={key} className="extra-row" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px", borderBottom: "1px solid #eee" }}>
+                <div className="extra-info">
+                  <span style={{ fontWeight: "bold", display: "block" }}>{key.charAt(0).toUpperCase() + key.slice(1)}</span>
+                  <span style={{ fontSize: "0.85rem", color: "#666" }}>+ CHF {EXTRA_PRICES[key]}/Tag</span>
+                </div>
+                <div className="radio-group" style={{ display: "flex", gap: "15px" }}>
+                  <label style={{ cursor: "pointer" }}>
+                    <input
+                      type="radio"
+                      name={key}
+                      checked={form.extras[key] === true}
+                      onChange={() => setExtraValue(key, true)}
+                      style={{ marginRight: "5px" }}
+                    />
+                    Ja
+                  </label>
+                  <label style={{ cursor: "pointer" }}>
+                    <input
+                      type="radio"
+                      name={key}
+                      checked={form.extras[key] === false}
+                      onChange={() => setExtraValue(key, false)}
+                      style={{ marginRight: "5px" }}
+                    />
+                    Nein
+                  </label>
+                </div>
+              </div>
             ))}
           </div>
 
