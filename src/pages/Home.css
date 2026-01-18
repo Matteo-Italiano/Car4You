@@ -198,3 +198,33 @@
     grid-template-columns: 1fr;
   }
 }
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding-right: 35px !important; 
+}
+
+.clear-btn {
+  position: absolute;
+  right: 12px;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.clear-btn:hover {
+  color: #ffffff;
+}

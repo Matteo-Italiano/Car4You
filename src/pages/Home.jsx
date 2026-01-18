@@ -34,6 +34,10 @@ const Home = () => {
     setSearchData({ ...searchData, [e.target.name]: e.target.value });
   };
 
+  const clearField = (fieldName) => {
+    setSearchData({ ...searchData, [fieldName]: '' });
+  };
+
   const handleSearch = () => {
     if (!searchData.pickupLoc || !searchData.startDate || !searchData.endDate) {
       alert("Bitte fülle alle Pflichtfelder aus!");
@@ -69,13 +73,21 @@ const Home = () => {
           <div className="location-section">
             <div className="input-group">
               <label>Abholort</label>
-              <input 
-                list="airports" 
-                name="pickupLoc" 
-                placeholder="Flughafen oder Stadt..." 
-                value={searchData.pickupLoc}
-                onChange={handleChange}
-              />
+              <div className="input-wrapper">
+                <input 
+                  list="airports" 
+                  name="pickupLoc" 
+                  placeholder="Flughafen oder Stadt..." 
+                  value={searchData.pickupLoc}
+                  onChange={handleChange}
+                  autoComplete="off" 
+                />
+                {searchData.pickupLoc && (
+                  <span className="clear-btn" onClick={() => clearField('pickupLoc')}>
+                    ✕
+                  </span>
+                )}
+              </div>
               <datalist id="airports">
                 {LOCATIONS.map((loc, index) => (
                   <option key={index} value={loc} />
@@ -93,13 +105,22 @@ const Home = () => {
             {showReturnLoc && (
               <div className="input-group fade-in">
                 <label>Rückgabeort</label>
-                <input 
-                  list="airports" 
-                  name="returnLoc" 
-                  placeholder="Rückgabeort wählen..." 
-                  value={searchData.returnLoc}
-                  onChange={handleChange}
-                />
+                {/* NEU: Wrapper auch hier */}
+                <div className="input-wrapper">
+                  <input 
+                    list="airports" 
+                    name="returnLoc" 
+                    placeholder="Rückgabeort wählen..." 
+                    value={searchData.returnLoc}
+                    onChange={handleChange}
+                    autoComplete="off"
+                  />
+                  {searchData.returnLoc && (
+                    <span className="clear-btn" onClick={() => clearField('returnLoc')}>
+                      ✕
+                    </span>
+                  )}
+                </div>
               </div>
             )}
           </div>
@@ -110,7 +131,6 @@ const Home = () => {
               <input 
                 type="date" 
                 name="startDate" 
-                
                 min={getTodayString()} 
                 value={searchData.startDate} 
                 onChange={handleChange} 
@@ -122,7 +142,6 @@ const Home = () => {
               <input 
                 type="date" 
                 name="endDate" 
-                // NEU: Sperrt alle Tage VOR dem gewählten Abholdatum
                 min={searchData.startDate || getTodayString()} 
                 value={searchData.endDate} 
                 onChange={handleChange} 
