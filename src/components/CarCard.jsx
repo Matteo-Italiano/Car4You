@@ -7,7 +7,6 @@ const CarCard = ({ car }) => {
   const navigate = useNavigate();
 
   const handleRent = () => {
-    // Navigate to insurance selection page
     navigate(`/insurance/${car.id}`, { state: { selectedCar: car } });
   };
 
@@ -18,7 +17,6 @@ const CarCard = ({ car }) => {
         <span className="category-badge">{car.category}</span>
       </div>
       
-      {/* Das Bild - WICHTIG: Pfad muss stimmen! */}
       <div className="card-image">
         <img src={car.image} alt={car.model} />
       </div>

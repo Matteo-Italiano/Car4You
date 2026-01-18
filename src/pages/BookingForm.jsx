@@ -164,10 +164,8 @@ export default function BookingForm() {
 
     if (!isReady) return;
 
-    // Speichert intern den Status, falls der User zurück navigiert (optional)
     saveToLocalStorage();
 
-    // Navigate to success page with booking data
     navigate("/success", {
       state: {
         car: selectedCar,
@@ -265,7 +263,6 @@ export default function BookingForm() {
           </div>
 
           <div className="form-actions">
-            {/* HIER WURDE DER ENTWURF-BUTTON ENTFERNT */}
             
             <button type="submit" className="primary" disabled={!isReady}>
               Kostenpflichtig mieten
